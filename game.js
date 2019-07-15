@@ -9,7 +9,7 @@ let letters = [];
 let blanksNum = 0
 let blanks = [];
 let wrongGuess = []
-
+let iRandom = Math.floor(Math.random() * words.length);
 let winsNum = 0
 let lossNum = 0
 let guessRemain = 12;
@@ -18,14 +18,14 @@ let guessRemain = 12;
 //Functions
 //**************************************************************************************************************** 
 const start = () => {
-    chosenWord = words[Math.floor(Math.random() * words.length)];
+    chosenWord = words[iRandom];
     letters = chosenWord.split('');
     blanksNum = letters.length;
 
 
     //reset
-    guessRemain = 12
-    wrongGuess = []
+    guessRemain = 12;
+    wrongGuess = [];
  
 
     //determine number of blanks needed onscreen
@@ -42,6 +42,22 @@ const start = () => {
     document.getElementById("wrong-guesses").innerText = wrongGuess;
 };
 
+//event listener for letter guesses
+
+document.onkeyup = event => {
+    
+   const userGuess = event.key.toLowerCase();
+    console.log(typeof userGuess)
+
+    if ((letters.includes(userGuess)) === false) {
+        guessRemain--;
+        document.getElementById("Guesses-remain").innerText = guessRemain;
+        wrongGuess.push(userGuess);
+        document.getElementById("wrong-guesses").innerText = wrongGuess;
+    } else {
+        console.log('right')
+    }
+}
 
 //Main Processes
 //**************************************************************************************************************** 
