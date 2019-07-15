@@ -26,7 +26,7 @@ const start = () => {
     //reset
     guessRemain = 12;
     wrongGuess = [];
- 
+
 
     //determine number of blanks needed onscreen
     for (let i = 0; i < blanksNum; i++) {
@@ -40,22 +40,39 @@ const start = () => {
     document.getElementById("wins").innerText = `Wins: ${winsNum}`
     document.getElementById("losses").innerText = `Losses: ${lossNum}`
     document.getElementById("wrong-guesses").innerText = wrongGuess;
+    document.getElementById("correct").innerText = letters;
 };
 
 //event listener for letter guesses
 
 document.onkeyup = event => {
-    
-   const userGuess = event.key.toLowerCase();
+    const userGuess = event.key.toLowerCase();
     console.log(typeof userGuess)
+    handleGuess(userGuess); 
+    
+}
 
+const handleGuess = (userGuess)=> {
     if ((letters.includes(userGuess)) === false) {
-        guessRemain--;
-        document.getElementById("Guesses-remain").innerText = guessRemain;
-        wrongGuess.push(userGuess);
-        document.getElementById("wrong-guesses").innerText = wrongGuess;
+        if (guessRemain > 0) {
+            guessRemain--;
+            document.getElementById("Guesses-remain").innerText = guessRemain;
+            wrongGuess.push(userGuess);
+            document.getElementById("wrong-guesses").innerText = wrongGuess;
+        } else {
+            alert("You are out of guesses!")
+        }
     } else {
         console.log('right')
+        letters.forEach(function(element){
+            if(element === userGuess){
+                let i  = letters.indexOf(userGuess);
+                blanks.splice(i, 1, userGuess);
+                console.log(blanks)
+                return blanks;
+            }
+        })
+        document.getElementById("blanksLetters").innerText = blanks.join(" ")
     }
 }
 

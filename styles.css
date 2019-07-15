@@ -1,4 +1,9 @@
 
 #blanksLetters {
     font-size: 48px;
+
+}
+
+#correct {
+    visibility: hidden;
 }
