@@ -17,68 +17,67 @@ let guessRemain = 12;
 
 //Functions
 //**************************************************************************************************************** 
+function setGuessNum() { document.getElementById("Guesses-remain").innerText = guessRemain; }
+function showWrong() { document.getElementById("wrong-guesses").innerText = wrongGuess }
+function showCorrect() { document.getElementById("blanksLetters").innerText = blanks.join(" ") }
+function changeWin() { document.getElementById("wins").innerText = `Wins: ${winsNum}` }
+function changeLoss() { document.getElementById("losses").innerText = `Losses: ${lossNum}` }
+
 const start = () => {
     chosenWord = words[iRandom];
     letters = chosenWord.split('');
     blanksNum = letters.length;
 
-
     //reset
     guessRemain = 12;
     wrongGuess = [];
-
 
     //determine number of blanks needed onscreen
     for (let i = 0; i < blanksNum; i++) {
         blanks.push(" _  ");
     }
-
-
     //DOM Manipulation
-    document.getElementById("blanksLetters").innerText = blanks.join(" ")
-    document.getElementById("Guesses-remain").innerText = guessRemain;
-    document.getElementById("wins").innerText = `Wins: ${winsNum}`
-    document.getElementById("losses").innerText = `Losses: ${lossNum}`
-    document.getElementById("wrong-guesses").innerText = wrongGuess;
-    document.getElementById("correct").innerText = letters;
+    setGuessNum();
+    showWrong();
+    showCorrect();
+    changeWin();
+    changeLoss();
 };
 
-//event listener for letter guesses
-
-document.onkeyup = event => {
-    const userGuess = event.key.toLowerCase();
-    console.log(typeof userGuess)
-    handleGuess(userGuess); 
-    
-}
-
-const handleGuess = (userGuess)=> {
+const handleGuess = (userGuess) => {
     if ((letters.includes(userGuess)) === false) {
         if (guessRemain > 0) {
             guessRemain--;
-            document.getElementById("Guesses-remain").innerText = guessRemain;
+            setGuessNum();
             wrongGuess.push(userGuess);
-            document.getElementById("wrong-guesses").innerText = wrongGuess;
+            showWrong();
         } else {
             alert("You are out of guesses!")
         }
     } else {
         console.log('right')
-        letters.forEach(function(element){
-            if(element === userGuess){
-                let i  = letters.indexOf(userGuess);
-                blanks.splice(i, 1, userGuess);
+        guessRemain--;
+        setGuessNum();
+        for(i=0; i<letters.length; i++) {
+            if (letters[i] === userGuess) {
+                blanks.splice(i, 1, letters[i]);
                 console.log(blanks)
-                return blanks;
             }
-        })
-        document.getElementById("blanksLetters").innerText = blanks.join(" ")
+            showCorrect();
+        }
     }
 }
 
 //Main Processes
 //**************************************************************************************************************** 
 start();
+
+//event listener for letter guesses
+document.onkeyup = event => {
+    const userGuess = event.key.toLowerCase();
+    console.log(typeof userGuess)
+    handleGuess(userGuess);
+}
 
 console.log(chosenWord);
 console.log(letters);
