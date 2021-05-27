@@ -48,10 +48,11 @@ const start = () => {
 const resetGame = function () {
    document.location.reload();
     chosenWord = "";
+    wordDisplay.innerText = "";
     start();
 }
 function validateInput(guess) {
-    // accept only letters
+    // accept only lettersiv6edg
     const accept = /[a-zA-Z]/;
     if (!guess.match(accept)) {
         message.innerText = "Please type a single letter character."
@@ -65,7 +66,8 @@ function checkForWin() {
     const displayText = wordDisplay.innerText;
     // Use REGEX to eliminate spaces from innerText value
     const strippedText = displayText.replace(/\s+/g, '');
-    if (strippedText=== chosenWord) {
+    if (strippedText === chosenWord) {
+        message.classList.add("won")
        message.innerText = "Congratulations! You've won the game."
     }
 }
@@ -77,12 +79,14 @@ const handleGuess = (userGuess) => {
             setGuessNum();
             wrongGuess.push(userGuess);
             showWrong();
+            message.innerText = "Try another letter"
         } else {
-            alert("You are out of guesses!")
+            message.innerText="You are out of guesses. Game over."
             lossNum += 1;
             resetGame();
         }
     } else {
+        message.innerText="That's a very good guess."
         console.log('right')
         guessRemain--;
         setGuessNum();
@@ -111,11 +115,9 @@ start();
             console.log(blanks.length)
             console.log(wordDisplay.innerText);
         }
-          
-         
-        
+              
 
-// const newGame = document.querySelector("new-game");
+//  const newGame = document.querySelector("new-game");
 
 // newGame.addEventListener("click", function () {
     
