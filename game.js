@@ -6,7 +6,6 @@ let words = ['france', 'china', 'southkorea', 'japan', 'australia', 'brazil', 'p
     'serbia', 'finland', 'belgium', 'macedonia', 'lebanon', 'mongolia', 'guatemala', 'mauritania', 'cameroon', 'uganda']
 let chosenWord = "";
 let letters = [];
-let blanksNum = 0
 let blanks = [];
 let wrongGuess = []
 let iRandom = Math.floor(Math.random() * words.length);
@@ -14,6 +13,7 @@ let winsNum = 0
 let lossNum = 0
 let guessRemain = 12;
 
+const wordDisplay = document.querySelector("#blanksLetters");
 
 //Functions
 //**************************************************************************************************************** 
@@ -23,19 +23,18 @@ function showCorrect() { document.getElementById("blanksLetters").innerText = bl
 function changeWin() { document.getElementById("wins").innerText = `Wins: ${winsNum}` }
 function changeLoss() { document.getElementById("losses").innerText = `Losses: ${lossNum}` }
 
+
 const start = () => {
-   
     chosenWord = words[iRandom];
     letters = chosenWord.split('');
-    blanksNum = letters.length;
-
+   
     //reset
     guessRemain = 12;
     wrongGuess = [];
-
     //determine number of blanks needed onscreen
-    for (let i = 0; i < blanksNum; i++) {
+    for (let letter of letters) {
         blanks.push(" _  ");
+        console.log(letter)
     }
     //DOM Manipulation
     setGuessNum();
@@ -47,9 +46,18 @@ const start = () => {
 
 const resetGame = function () {
    document.location.reload();
-chosenWord = "";
-start();
- }
+    chosenWord = "";
+    start();
+}
+ 
+function checkForWin() {
+    const displayText = wordDisplay.innerText;
+    // Use REGEX to eliminate spaces from innerText value
+    const strippedText = displayText.replace(/\s+/g, '');
+    if (strippedText=== chosenWord) {
+        alert("Congratulations, You have won the game!")
+    }
+}
 
 const handleGuess = (userGuess) => {
     if ((letters.includes(userGuess)) === false) {
@@ -60,21 +68,24 @@ const handleGuess = (userGuess) => {
             showWrong();
         } else {
             alert("You are out of guesses!")
+            lossNum += 1;
             resetGame();
         }
     } else {
         console.log('right')
         guessRemain--;
         setGuessNum();
-        for (i = 0; i < letters.length; i++) {
+        for (i = 0; i <= letters.length; i++) {
             if (letters[i] === userGuess) {
                 blanks.splice(i, 1, letters[i]);
-                console.log(blanks)
             }
             showCorrect();
         }
     }
+    checkForWin();
 }
+
+
 //Main Processes
 //**************************************************************************************************************** 
 start();
@@ -82,8 +93,9 @@ start();
         //event listener for letter guesses
         document.onkeyup = event => {
             const userGuess = event.key.toLowerCase();
-            console.log(typeof userGuess)
             handleGuess(userGuess);
+            console.log(blanks.length)
+            console.log(wordDisplay.innerText);
         }
 
 // const newGame = document.querySelector("new-game");
@@ -94,5 +106,4 @@ start();
 
         console.log(chosenWord);
         console.log(letters);
-        console.log(blanksNum);
         console.log(blanksLetters);
