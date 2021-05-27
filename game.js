@@ -54,7 +54,7 @@ function validateInput(guess) {
     // accept only letters
     const accept = /[a-zA-Z]/;
     if (!guess.match(accept)) {
-        message.innerText = "You can only enter a single character from A to Z"
+        message.innerText = "Please type a single letter character."
     } else {
        message.innerText = "That's a good guess."
         return guess
@@ -66,7 +66,7 @@ function checkForWin() {
     // Use REGEX to eliminate spaces from innerText value
     const strippedText = displayText.replace(/\s+/g, '');
     if (strippedText=== chosenWord) {
-        alert("Congratulations, You have won the game!")
+       message.innerText = "Congratulations! You've won the game."
     }
 }
 

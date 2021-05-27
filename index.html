@@ -17,93 +17,55 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="text-center">World Wide Word Guess</h1>
-        <h4 class="text-center">Guess the name of the country</h4>
-        <h6>Press any key to get started........</h6>
-        <h6>This is a hangman style word game. Please note informal country names are used, ex: The Democratic Republic of Congo is just written as Congo
-        </h6>
-    </header>
-    <main>
+    <div class="px-4 pt-5 my-5 text-center border-bottom">
+        <h1 class="display-4 fw-bold">World Wide Word Guess</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">This is a hangman style word game. A country name is chosen at random. You try to guess it, letter by letter, until you run out of guesses. </p>
 
-        <div class="hangman">
-            <div class="box a1">A</div>
-            <div class="box b1">B</div>
-            <div class="box c1">C</div>
-            <div class="box d1">D</div>
-            <div class="box e1">E</div>
-            <div class="box f1">F</div>
-            <div class="box a2">A</div>
-            <div class="box b2">B</div>
-            <div class="box c2">C</div>
-            <div class="box d2">D</div>
-            <div class="box e2">E</div>
-            <div class="box f2">F</div>
-            <div class="box a3">A</div>
-            <div class="box b3">B</div>
-            <div class="box c3">C</div>
-            <div class="box d3">D</div>
-            <div class="box e3">E</div>
-            <div class="box f3">F</div>
-            <div class="box a4">A</div>
-            <div class="box b4">B</div>
-            <div class="box c4">C</div>
-            <div class="box d4">D</div>
-            <div class="box e4">E</div>
-            <div class="box f4">F</div>
-            <div class="box a5">A</div>
-            <div class="box b5">B</div>
-            <div class="box c5">C</div>
-            <div class="box d5">D</div>
-            <div class="box e5">E</div>
-            <div class="box f5">F</div>
-            <div class="box a6">A</div>
-            <div class="box b6">B</div>
-            <div class="box c6">C</div>
-            <div class="box d6">D</div>
-            <div class="box e6">E</div>
-            <div class="box f6">F</div>
-
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <h4>Press a letter key to guess the country name.</h4>
+          </div>
         </div>
-       
-
-        <div class="card text-center">
-            <div>
-                <h3 class="card-header">Current Word</h3>
-                <h3 class="card-header" id="blanksLetters"></h3>
-            </div>
+        <div class="overflow-hidden" style="max-height: 30vh;">
+          <div class="container px-5">
+            <img src="img/flags.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="900" height="700" loading="lazy">
+          </div>
+         
         </div>
+      </div>
+    
+      <div class="b-example-divider"></div>
+        <main>
+            <div class="container">
+            <div class="row">
+                <div class="card text-center col-md-8">
+                    <h3 class="card-header">Current Word</h3>
+                    <h3 class="card-header" id="blanksLetters"></h3>
+                </div>
+                <div class ="col-md-4">
+                    <div class="card text-center ">
+                        <h3 class="card-header">Guesses Remaining</h3>
+                        <p class="card-header" id="Guesses-remain"></p>
+                    </div>
 
-        <div class="card text-center">
-            <div>
-                <h3 class="card-header">Guesses Remaining</h3>
-                <p class="card-header" id="Guesses-remain"></p>
+                    <div class="card text-center">
+                        <div>
+                        <h3 class="card-header">Incorrect Guesses</h3>
+                        <p class="card-header" id="wrong-guesses"> </p>
+                        </div>
+                    </div>
+                    <div class="card text-center">
+                        <h3 class = "message"></h3>
+                         <h3 class="card-header">Wins and Losses</h3>
+                        <p class="card-header" id="wins"> Wins:</p>
+                        <p class="card-header" id="losses">Losses: </p>
+                    </div>
+                    <button class="btn btn-primary new-game">Start a New Game</button>
+                </div>
             </div>
-        </div>
-
-        <div class="card text-center">
-            <div>
-                <h3 class="card-header">Incorrect Guesses</h3>
-                <p class="card-header" id="wrong-guesses"> </p>
-            </div>
-        </div>
-        <div class="card text-center">
-            <div>
-                <h3 class = "message"></h3>
-                <h3 class="card-header">Wins and Losses</h3>
-                <p class="card-header" id="wins"> Wins:</p>
-                <p class="card-header" id="losses">Losses: </p>
-            </div>
-            <button class="btn btn-primary new-game">Start a New Game</button>
-        </div>
-        <footer>
-            <div>
-                <div>Icons made by <a href="https://www.freepik.com/?__hstc=57440181.06c05c9e7dbf1006c7dffba72d32a636.1563638489215.1563638489215.1563638489215.1&__hssc=57440181.4.1563638489216&__hsfp=1397618105" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"
-                        title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-            </div>
-        </footer>
-
-    </main>
+    </div>
+    
+</main>
 
 
 </body>

@@ -6,25 +6,6 @@ h1 {
   font-family: "Playfair Display", serif;
 }
 
-.hangman {
-  display: grid;
-  grid-template: repeat(6, 1fr) / repeat(6, 1fr);
-  padding: 1em;
-  width: 500px;
-  height: 500px;
-  justify-content: center;
-}
-
-.hangman > div {
-  background: darkturquoise;
-  padding: 1em;
-  min-height: 20%;
-}
-
-.hangman > div:nth-child(even) {
-  background: plum;
-}
-
 main {
   display: grid;
   justify-items: center;
