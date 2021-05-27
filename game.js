@@ -14,6 +14,7 @@ let lossNum = 0
 let guessRemain = 12;
 
 const wordDisplay = document.querySelector("#blanksLetters");
+const message = document.querySelector(".message")
 
 //Functions
 //**************************************************************************************************************** 
@@ -48,6 +49,16 @@ const resetGame = function () {
    document.location.reload();
     chosenWord = "";
     start();
+}
+function validateInput(guess) {
+    // accept only letters
+    const accept = /[a-zA-Z]/;
+    if (!guess.match(accept)) {
+        message.innerText = "You can only enter a single character from A to Z"
+    } else {
+       message.innerText = "That's a good guess."
+        return guess
+    }
 }
  
 function checkForWin() {
@@ -93,10 +104,16 @@ start();
         //event listener for letter guesses
         document.onkeyup = event => {
             const userGuess = event.key.toLowerCase();
-            handleGuess(userGuess);
+            let validated = validateInput(userGuess);
+            if (validated) {
+                handleGuess(validated);
+            }
             console.log(blanks.length)
             console.log(wordDisplay.innerText);
         }
+          
+         
+        
 
 // const newGame = document.querySelector("new-game");
 
