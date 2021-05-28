@@ -9,8 +9,8 @@ let letters = [];
 let blanks = [];
 let wrongGuess = []
 let iRandom = Math.floor(Math.random() * words.length);
-let winsNum = 0
-let lossNum = 0
+let winsNum = 0;
+let lossNum = 0;
 let guessRemain = 12;
 
 const wordDisplay = document.querySelector("#blanksLetters");
@@ -26,12 +26,19 @@ function changeLoss() { document.getElementById("losses").innerText = `Losses: $
 
 
 const start = () => {
+      //reset
+    wordDisplay.innerText = "";
+    letters = [];
+    blanks = [];
+    chosenWord = "";
+     guessRemain = 12;
+    wrongGuess = [];
+    
+
     chosenWord = words[iRandom];
     letters = chosenWord.split('');
    
-    //reset
-    guessRemain = 12;
-    wrongGuess = [];
+  
     //determine number of blanks needed onscreen
     for (let letter of letters) {
         blanks.push(" _  ");
@@ -45,15 +52,15 @@ const start = () => {
     changeLoss();
 };
 
-const resetGame = function () {
-   document.location.reload();
-    chosenWord = "";
-    wordDisplay.innerText = "";
-    start();
-}
+// const resetGame = function () {
+//    document.location.reload();
+//     chosenWord = "";
+//     wordDisplay.innerText = "";
+//     start();
+// }
 function validateInput(guess) {
-    // accept only lettersiv6edg
-    const accept = /[a-zA-Z]/;
+    // accept only letters
+    const accept = /^[A-Za-z]+$/;
     if (!guess.match(accept)) {
         message.innerText = "Please type a single letter character."
     } else {
@@ -68,7 +75,9 @@ function checkForWin() {
     const strippedText = displayText.replace(/\s+/g, '');
     if (strippedText === chosenWord) {
         message.classList.add("won")
-       message.innerText = "Congratulations! You've won the game."
+        message.innerText = "Congratulations! You've won the game."
+        winsNum += 1;
+      
     }
 }
 
@@ -96,6 +105,7 @@ const handleGuess = (userGuess) => {
     } else {
         message.innerText = "You are out of guesses. Game over."
         lossNum += 1;
+        
     }
     checkForWin()
 }
@@ -106,22 +116,40 @@ const handleGuess = (userGuess) => {
 start();
 
         //event listener for letter guesses
-        document.onkeyup = event => {
-            const userGuess = event.key.toLowerCase();
-            let validated = validateInput(userGuess);
-            if (validated) {
-                handleGuess(validated);
-            }
-            console.log(blanks.length)
-            console.log(wordDisplay.innerText);
+document.onkeyup = event => {
+    const charCode = event.key
+    console.log(charCode)
+
+    // Check for key names not eliminated by the Regex validation function
+    const badAlphaKeys = ['Enter', 'Shift', 'Alt', 'Tab', 'Meta', 'Control', 'Backspace']
+    if (badAlphaKeys.indexOf(charCode) === -1) {
+        const userGuess = event.key.toLowerCase();
+        let validated = validateInput(userGuess);
+        if (validated) {
+            handleGuess(validated);
+        } else {
+            console.log("not validated")
         }
-              
+        console.log(blanks.length)
+        console.log(wordDisplay.innerText);
+    } else {
+        message.innerText = "Please enter a letter"
 
-//  const newGame = document.querySelector("new-game");
+    }
+}
 
-// newGame.addEventListener("click", function () {
-    
-// })
+// document.onkeyup = event => {
+//     switch 
+// }
+
+
+
+ const newGame = document.querySelector(".new-game");
+
+newGame.addEventListener("click", function () {
+    chosenWord = "";
+    start()
+})
 
         console.log(chosenWord);
         console.log(letters);
