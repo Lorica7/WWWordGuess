@@ -18,6 +18,10 @@ main {
   font-style: italic;
 }
 
+span {
+  color: #5bc0de;
+}
+
 .card.text-center {
   border-radius: 0.5;
 }

@@ -11,7 +11,7 @@ let wrongGuess = []
 let iRandom = Math.floor(Math.random() * words.length);
 let winsNum = 0;
 let lossNum = 0;
-let guessRemain = 12;
+let guessRemain = 6;
 
 const wordDisplay = document.querySelector("#blanksLetters");
 const message = document.querySelector(".message")
@@ -37,7 +37,7 @@ const start = () => {
     letters = [];
     blanks = [];
     chosenWord = "";
-     guessRemain = 12;
+     guessRemain = 6;
     wrongGuess = [];
     message.innerText = ""
 
@@ -104,8 +104,8 @@ const handleGuess = (userGuess) => {
          else {
             message.innerText = "That's a very good guess."
             console.log('right')
-            guessRemain--;
-            setGuessNum();
+            // guessRemain--;
+            // setGuessNum();
             for (i = 0; i <= letters.length; i++) {
                 if (letters[i] === userGuess) {
                     blanks.splice(i, 1, letters[i]);
