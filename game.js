@@ -72,32 +72,32 @@ function checkForWin() {
     }
 }
 
+
 const handleGuess = (userGuess) => {
-    if ((letters.includes(userGuess)) === false) {
-        if (guessRemain > 0) {
+    if (guessRemain > 0) {
+        if ((letters.includes(userGuess)) === false) {
             guessRemain--;
             setGuessNum();
             wrongGuess.push(userGuess);
             showWrong();
             message.innerText = "Try another letter"
         } else {
-            message.innerText="You are out of guesses. Game over."
-            lossNum += 1;
-            resetGame();
+            message.innerText = "That's a very good guess."
+            console.log('right')
+            guessRemain--;
+            setGuessNum();
+            for (i = 0; i <= letters.length; i++) {
+                if (letters[i] === userGuess) {
+                    blanks.splice(i, 1, letters[i]);
+                }
+                showCorrect();
+            }
         }
     } else {
-        message.innerText="That's a very good guess."
-        console.log('right')
-        guessRemain--;
-        setGuessNum();
-        for (i = 0; i <= letters.length; i++) {
-            if (letters[i] === userGuess) {
-                blanks.splice(i, 1, letters[i]);
-            }
-            showCorrect();
-        }
+        message.innerText = "You are out of guesses. Game over."
+        lossNum += 1;
     }
-    checkForWin();
+    checkForWin()
 }
 
 
