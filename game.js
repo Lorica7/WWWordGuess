@@ -23,10 +23,16 @@ function showWrong() { document.getElementById("wrong-guesses").innerText = wron
 function showCorrect() { document.getElementById("blanksLetters").innerText = blanks.join(" ") }
 function changeWin() { document.getElementById("wins").innerText = `Wins: ${winsNum}` }
 function changeLoss() { document.getElementById("losses").innerText = `Losses: ${lossNum}` }
+function getRandom() {
+    let random = Math.floor(Math.random() * words.length);
+    return random
+}
+
 
 
 const start = () => {
       //reset
+    iRandom = getRandom()
     wordDisplay.innerText = "";
     letters = [];
     blanks = [];
@@ -138,13 +144,8 @@ document.onkeyup = event => {
     }
 }
 
-// document.onkeyup = event => {
-//     switch 
-// }
 
-
-
- const newGame = document.querySelector(".new-game");
+const newGame = document.querySelector(".new-game");
 
 newGame.addEventListener("click", function () {
     chosenWord = "";
