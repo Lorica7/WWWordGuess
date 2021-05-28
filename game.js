@@ -39,7 +39,7 @@ const start = () => {
     chosenWord = "";
      guessRemain = 12;
     wrongGuess = [];
-    
+    message.innerText = ""
 
     chosenWord = words[iRandom];
     letters = chosenWord.split('');
@@ -83,20 +83,25 @@ function checkForWin() {
         message.classList.add("won")
         message.innerText = "Congratulations! You've won the game."
         winsNum += 1;
-      
+        changeWin();
     }
 }
 
 
 const handleGuess = (userGuess) => {
     if (guessRemain > 0) {
-        if ((letters.includes(userGuess)) === false) {
+        if (wrongGuess.includes(userGuess)=== true) {
+            message.innerText = "You've already guessed that letter"
+        }
+        else if
+            ((letters.includes(userGuess)) === false) {
             guessRemain--;
             setGuessNum();
             wrongGuess.push(userGuess);
             showWrong();
             message.innerText = "Try another letter"
-        } else {
+        }  
+         else {
             message.innerText = "That's a very good guess."
             console.log('right')
             guessRemain--;
@@ -108,10 +113,12 @@ const handleGuess = (userGuess) => {
                 showCorrect();
             }
         }
+    } else if (message.innerText = "You are out of guesses. Game over.") {
+        message.innerText = " The game is over. Click the button to start a new game."
     } else {
         message.innerText = "You are out of guesses. Game over."
         lossNum += 1;
-        
+        changeLoss();
     }
     checkForWin()
 }
